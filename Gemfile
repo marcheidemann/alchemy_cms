@@ -10,7 +10,7 @@ group :test do
 	gem 'capybara-webkit', '~>0.8.0'
 	gem "launchy"
 	gem "database_cleaner"
-	gem "fuubar"
+	gem "fuubar" unless ENV['CI']
 end
 
 group :assets do
