@@ -107,6 +107,24 @@
 				cancelLabel: '<%= t("No") -%>'
 			},
 			toolbarButtons: [
+				<% if @page.can_have_containers? %>
+				{
+					title: 'Einen neuen Container hinzufügen',
+					label: 'Neuer Container',
+					iconClass: 'create_container',
+					onClick: function() {
+						Alchemy.openWindow(
+							'<%= alchemy.new_admin_container_path(:page_id => @page.id) %>',
+							'Neuer Container',
+							320,
+							100,
+							false,
+							true,
+							true
+						);
+					}	
+				},
+				<% end %>
 				{
 					title: '<%= t("New Element") -%>',
 					label: '<%= t("New Element") -%>',
@@ -124,8 +142,8 @@
 					}
 				},
 				{
-					title: '<%= t("Clipboard") -%>',
-					label: '<%= t("Show clipboard") -%>',
+					title: '<%= t("Show clipboard") -%>',
+					label: '<%= t("Clipboard") -%>',
 					iconClass: 'clipboard<%= clipboard_empty?("elements") ? "" : " full" -%>',
 					buttonId: 'clipboard_button',
 					onClick: function() {
@@ -142,7 +160,7 @@
 				},
 				{
 					title: '<%= t("Show trash") -%>',
-					label: '<%= t("Show trash") -%>',
+					label: '<%= t("Trash") -%>',
 					iconClass: 'trash<%= trash_empty?("elements") ? "" : " full" -%>',
 					buttonId: 'element_trash_button',
 					onClick: function() {

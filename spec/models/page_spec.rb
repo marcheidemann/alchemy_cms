@@ -50,7 +50,7 @@ describe Alchemy::Page do
 			]
 		end
 		
-	  it "should return the collection of elements if passed an array into options[:collection]" do
+		it "should return the collection of elements if passed an array into options[:collection]" do
 			options = {:collection => @page.elements}
 			@page.find_elements(options).all.should == @page.elements.all
 		end
@@ -66,40 +66,40 @@ describe Alchemy::Page do
 			end
 
 			it "should not return the elements passed as options[:except]" do
-			  @page.find_elements({:except => ['article']}, true).all.should == @page.elements - @page.elements.named('article').all
+				@page.find_elements({:except => ['article']}, true).all.should == @page.elements - @page.elements.named('article').all
 			end
 
-		  it "should return elements offsetted" do
-			  @page.find_elements({:offset => 2}, true).all.should == @page.elements.offset(2)
-		  end
+			it "should return elements offsetted" do
+				@page.find_elements({:offset => 2}, true).all.should == @page.elements.offset(2)
+			end
 
-		  it "should return elements limitted in count" do
-			  @page.find_elements({:count => 1}, true).all.should == @page.elements.limit(1)
-		  end
+			it "should return elements limitted in count" do
+				@page.find_elements({:count => 1}, true).all.should == @page.elements.limit(1)
+			end
 
 		end
 		
 		context "with show_non_public argument FALSE" do
 
 			it "should return all elements from empty arguments" do
-			   @page.find_elements().all.should == @page.elements.published.all
+				 @page.find_elements().all.should == @page.elements.published.all
 			end
 
 			it "should only return the public elements passed as options[:only]" do
-			  @page.find_elements(:only => ['article']).all.should == @page.elements.published.named('article').all
+				@page.find_elements(:only => ['article']).all.should == @page.elements.published.named('article').all
 			end
 
 			it "should return all public elements except the ones passed as options[:except]" do
-			  @page.find_elements(:except => ['article']).all.should == @page.elements.published.all - @page.elements.published.named('article').all
+				@page.find_elements(:except => ['article']).all.should == @page.elements.published.all - @page.elements.published.named('article').all
 			end
 
-		  it "should return elements offsetted" do
-			  @page.find_elements({:offset => 2}).all.should == @page.elements.published.offset(2)
-		  end
+			it "should return elements offsetted" do
+				@page.find_elements({:offset => 2}).all.should == @page.elements.published.offset(2)
+			end
 
-		  it "should return elements limitted in count" do
-			  @page.find_elements({:count => 1}).all.should == @page.elements.published.limit(1)
-		  end
+			it "should return elements limitted in count" do
+				@page.find_elements({:count => 1}).all.should == @page.elements.published.limit(1)
+			end
 
 		end
 	
@@ -173,46 +173,46 @@ describe Alchemy::Page do
 	end
 
 	context ".all_locked" do
-	  it "should return 1 page that is blocked by a user at the moment" do
-	    Factory(:public_page, :locked => true, :name => 'First Public Child', :parent_id => @language_root.id, :language => @language)
-	    Alchemy::Page.all_locked.should have(1).pages
-	  end
+		it "should return 1 page that is blocked by a user at the moment" do
+			Factory(:public_page, :locked => true, :name => 'First Public Child', :parent_id => @language_root.id, :language => @language)
+			Alchemy::Page.all_locked.should have(1).pages
+		end
 	end
 	
 	context ".language_roots" do
-	  it "should return 1 language_root" do
+		it "should return 1 language_root" do
 			Factory(:public_page, :name => 'First Public Child', :parent_id => @language_root.id, :language => @language)
-	    Alchemy::Page.language_roots.should have(1).pages
-	  end
+			Alchemy::Page.language_roots.should have(1).pages
+		end
 	end
 	
 	
 	context ".layoutpages" do
-	  it "should return 1 layoutpage" do
+		it "should return 1 layoutpage" do
 			Factory(:public_page, :layoutpage => true, :name => 'Layoutpage', :parent_id => @rootpage.id, :language => @language)
-	    Alchemy::Page.layoutpages.should have(1).pages
-	  end
+			Alchemy::Page.layoutpages.should have(1).pages
+		end
 	end
 	
 	context ".visible" do
-	  it "should return 1 visible page" do
-	    Factory(:public_page, :name => 'First Public Child', :visible => true, :parent_id => @language_root.id, :language => @language)
-	    Alchemy::Page.visible.should have(1).pages
-	  end
+		it "should return 1 visible page" do
+			Factory(:public_page, :name => 'First Public Child', :visible => true, :parent_id => @language_root.id, :language => @language)
+			Alchemy::Page.visible.should have(1).pages
+		end
 	end
 	
 	context ".accessable" do
-	  it "should return 2 accessable pages" do
-	    Factory(:public_page, :name => 'First Public Child', :restricted => true, :parent_id => @language_root.id, :language => @language)
+		it "should return 2 accessable pages" do
+			Factory(:public_page, :name => 'First Public Child', :restricted => true, :parent_id => @language_root.id, :language => @language)
 			Alchemy::Page.accessable.should have(2).pages
-	  end
+		end
 	end
 	
 	context ".restricted" do
-	  it "should return 1 restricted page" do
-	    Factory(:public_page, :name => 'First Public Child', :restricted => true, :parent_id => @language_root.id, :language => @language)
-	    Alchemy::Page.restricted.should have(1).pages
-	  end
+		it "should return 1 restricted page" do
+			Factory(:public_page, :name => 'First Public Child', :restricted => true, :parent_id => @language_root.id, :language => @language)
+			Alchemy::Page.restricted.should have(1).pages
+		end
 	end
 	
 	describe "#cell_definitions" do
@@ -430,6 +430,23 @@ describe Alchemy::Page do
 				@page.elements.should be_empty
 			end
 
+		end
+
+	end
+
+	context "having containers", :focus => true do
+
+		before(:each) do
+			@page = Factory(:public_page)
+			@page.stub!(:definition).and_return({'name' => @page.page_layout, 'containers' => ['image_slider']})
+		end
+		
+		it "should return true if asked for if it can have containers" do
+			@page.can_have_containers?.should == true
+		end
+
+		it "should have a collection of available container definitions" do
+			@page.available_container_definitions.should == [{:name => 'image_slider', :elements => ['slide']}]
 		end
 
 	end

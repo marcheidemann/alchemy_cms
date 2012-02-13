@@ -42,6 +42,8 @@ Alchemy::Engine.routes.draw do
 
 		resources :users
 
+		resources :containers
+
 		resources :contents do
 			collection do
 				post :order

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116125112) do
+ActiveRecord::Schema.define(:version => 20120213122414) do
 
   create_table "alchemy_attachments", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,21 @@ ActiveRecord::Schema.define(:version => 20111116125112) do
     t.datetime "updated_at"
   end
 
+  create_table "alchemy_containers", :force => true do |t|
+    t.string   "name"
+    t.integer  "page_id"
+    t.integer  "cell_id"
+    t.integer  "position"
+    t.boolean  "folded",     :default => false
+    t.boolean  "public",     :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  add_index "alchemy_containers", ["page_id"], :name => "index_alchemy_containers_on_page_id", :unique => true
+
   create_table "alchemy_contents", :force => true do |t|
     t.string   "name"
     t.string   "essence_type"
@@ -49,14 +64,15 @@ ActiveRecord::Schema.define(:version => 20111116125112) do
     t.string   "name"
     t.integer  "position"
     t.integer  "page_id"
-    t.boolean  "public",     :default => true
-    t.boolean  "folded",     :default => false
-    t.boolean  "unique",     :default => false
+    t.boolean  "public",       :default => true
+    t.boolean  "folded",       :default => false
+    t.boolean  "unique",       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.integer  "cell_id"
+    t.integer  "container_id"
   end
 
   add_index "alchemy_elements", ["page_id", "position"], :name => "index_elements_on_page_id_and_position"

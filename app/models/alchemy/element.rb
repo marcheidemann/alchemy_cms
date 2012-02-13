@@ -2,12 +2,13 @@ module Alchemy
 	class Element < ActiveRecord::Base
 
 		# All Elements inside a cell are a list. All Elements not in cell are in the cell_id.nil list.
-		acts_as_list :scope => [:page_id, :cell_id]
+		acts_as_list :scope => [:page_id, :cell_id, :container_id]
 		stampable :stamper_class_name => :user
 
 		has_many :contents, :order => :position, :dependent => :destroy
 		belongs_to :cell
 		belongs_to :page
+		belongs_to :container
 		has_and_belongs_to_many :to_be_sweeped_pages, :class_name => 'Alchemy::Page', :uniq => true, :join_table => 'alchemy_elements_alchemy_pages'
 
 		validates_uniqueness_of :position, :scope => [:page_id, :cell_id]

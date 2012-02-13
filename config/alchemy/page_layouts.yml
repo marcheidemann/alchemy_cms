@@ -32,6 +32,7 @@
   unique: true
   elements: [header, intro_image_text]
   autogenerate: [header, intro_image_text]
+  containers: [image_slider]
 
 - name: standard
   elements: [article, claim, header, bild, bild_text, text, intro, headline, image_mosaic, download]

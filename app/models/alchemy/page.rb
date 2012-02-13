@@ -468,6 +468,19 @@ module Alchemy
 			cells.any?
 		end
 
+		# Returns true or false if the page has a page_layout that has container.
+		def can_have_containers?
+			!definition['containers'].blank?
+		end
+
+		def has_containers?
+			containers.any?
+		end
+
+		def available_container_definitions
+			Container.definitions.select { |d| self.definition['containers'].include? d[:name] }
+		end
+
 		def self.link_target_options
 			options = [
 				[I18n.t('default', :scope => :link_target_options), '']

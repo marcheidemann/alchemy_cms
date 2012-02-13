@@ -1,0 +1,17 @@
+<%= form_for [:admin, @container] do |f| %>
+<table>
+	<tr>
+		<td class="label short">
+			<%= f.label :name %>
+		</td>
+		<td class="select">
+			<%= f.select :name, @containers.map { |c| [c[:name].camelcase, c[:name]] } %>
+		</td>
+	</tr>
+	<tr>
+		<td class="submit" colspan="2">
+			<%= f.button t(:create), :class => 'button' %>
+		</td>
+	</tr>
+</table>
+<% end -%>
