@@ -1,11 +1,12 @@
-<%= form_for [:admin, @container] do |f| %>
+<%= form_for [:admin, @container], :remote => true do |f| %>
+<div id="errors" style="display: none"></div>
 <table>
 	<tr>
 		<td class="label short">
 			<%= f.label :name %>
 		</td>
 		<td class="select">
-			<%= f.select :name, @containers.map { |c| [c[:name].camelcase, c[:name]] } %>
+			<%= f.select :name, [['Bitte wählen', '']] + @containers.map { |c| [c[:name].camelcase, c[:name]] } %>
 		</td>
 	</tr>
 	<tr>

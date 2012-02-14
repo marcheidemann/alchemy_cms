@@ -19,6 +19,8 @@ module Alchemy
 
 		acts_as_list :scope => [:page_id, :cell_id]
 
+		validates :name, :presence => true
+
 		def initialize(name = nil)
 			super({:name => name})
 		end
