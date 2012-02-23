@@ -473,8 +473,9 @@ de:
       update:
         comma_seperated: "Durch Kommata getrennt eingeben"
     pagination:
-      next_page: "nächste Seite"
-      previous_page: "vorherige Seite"
+      next_page: "nächste Seite &raquo;"
+      previous_page: "&laquo; vorherige Seite"
+      truncate: '...'
     password: "Passwort"
     paste: "einfügen"
     picture_gallery_editor: 'Bilder'
@@ -548,9 +549,6 @@ de:
     "Or drag files over here": "Oder ziehen Sie die Dateien hier rauf"
     
   # END of Alchemy translation
-  
-  will_paginate:
-    page_gap: '...'
   
   # == Rails translations
   # Below are Rails specific translations for date, time, number, currency, error messages and so on.
